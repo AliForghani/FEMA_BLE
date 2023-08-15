@@ -1,5 +1,10 @@
 ## FEMA_BLE
-A program to make shapefile and plot streamlines and cross sections of FEMA_BLE HEC-RAS models
+A program to make shapefile and plot streamlines and cross sections of FEMA_BLE HEC-RAS models.
+
+Major capabilities of the package include:
+- A method to deriving the projected coordinate system of HEC-RAS models (with arcpy license)
+- Methods to make GeoDataFrame objects for a HEC-RAS model cross sections and streamlines by processing the geometry text file
+- A method to make GeoDataFrame for the HUC8 domain of the dataset downloaded from FEMA
 
 ## Background
 Base Level Engineering (BLE) is an efficient modeling and mapping approach that provides credible flood hazard data, especially for areas where no flood hazard data exists. The Federal Emergency Management Agency (FEMA) develops BLE datasets for different parts of the US (on HUC8 level). Each BLE dataset consists of: 
@@ -134,7 +139,7 @@ domain_gdf
 ```
 ![image](https://github.com/AliForghani/FEMA_BLE/assets/22843733/92f9e3c5-34c7-49ec-8df1-a4a6b5d32840)
 
-find the streamlines that are not completely inside the domain (likely due to a mistake in the creation of geometry file)
+find the streamlines that are not completely inside the domain (likely due to a mistake in creation of geometry file)
 ```python
 #a function to return True if some part of streamlines is outside  domain
 def is_river_outside_domain(line, polygon):
@@ -196,4 +201,7 @@ ctx.add_basemap(ax, crs=AllRiv.crs.to_string(), source=ctx.providers.Stamen.Wate
 plt.axis('off')
 ```
 ![image](https://github.com/AliForghani/FEMA_BLE/assets/22843733/76e60b95-c652-4e56-b086-a51c232f4c01)
+
+
+
 
