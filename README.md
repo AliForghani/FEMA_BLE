@@ -2,7 +2,7 @@
 A program to make shapefile and plot streamlines and cross sections of FEMA_BLE HEC-RAS models.
 
 Major capabilities of the package include:
-- A method to deriving the projected coordinate system of HEC-RAS models (with arcpy license)
+- A method to derive the projected coordinate system of HEC-RAS models (with arcpy license)
 - Methods to make GeoDataFrame objects for a HEC-RAS model cross sections and streamlines by processing the geometry text file
 - A method to make GeoDataFrame for the HUC8 domain of the dataset downloaded from FEMA
 
