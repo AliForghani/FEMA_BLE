@@ -69,8 +69,7 @@ print(EPSG)
 EPSG=2277 
 ```
 
-Before processing all ~2400 HEC-RAS models, it is a good idea to process a single HEC-RAS model geometry file and plot cross sections and streamlines. We can use "read_geometry()" method of BLE class to make GeoDataFrame 
-objects for cross sections and streamline of the provided geometry file. The EPSG code derived from previous section is an input argument for the "read_geometry()" method.
+Before processing all ~2400 HEC-RAS models, it is a good idea to process a single HEC-RAS model geometry file and plot cross sections and streamlines. We can use "read_geometry()" method of BLE class to make GeoDataFrame objects for cross sections and streamline of the provided geometry file. The EPSG code derived from previous section is an input argument for the "read_geometry()" method.
 
 
 ```python
@@ -139,7 +138,7 @@ domain_gdf
 ```
 ![image](https://github.com/AliForghani/FEMA_BLE/assets/22843733/92f9e3c5-34c7-49ec-8df1-a4a6b5d32840)
 
-find the streamlines that are not completely inside the domain (likely due to a mistake in creation of geometry file)
+Before plotting all streamlines, find the streamlines that are not completely inside the domain (likely due to a mistake in creation of geometry file)
 ```python
 #a function to return True if some part of streamlines is outside  domain
 def is_river_outside_domain(line, polygon):
