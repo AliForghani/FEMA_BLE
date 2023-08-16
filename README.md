@@ -180,7 +180,7 @@ domain_gdf.boundary.plot(ax=ax, color='red')
 AllRiv_outside.plot(ax=ax, color='blue')
 plt.axis('off')
 ```
-<img ![image](https://github.com/AliForghani/FEMA_BLE/assets/22843733/960f3994-de1e-40e2-98f1-9b913334523f) width="50%">
+![image](https://github.com/AliForghani/FEMA_BLE/assets/22843733/960f3994-de1e-40e2-98f1-9b913334523f)
 
 Above plot shows that one shp file ('../River_SHP\Rabbs Creek-Colorado River\RABBS 0421\RABBS 0421.shp') has major error and needs to be excluded from the final plot.
 ```python
