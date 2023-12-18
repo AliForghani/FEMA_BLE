@@ -53,7 +53,7 @@ class BLE (object):
         inputs are 1) path to the HEC-RAS geometry text file, 2) A Pandas DataFrame with reach info
         output is a GeoDataFrame of the streamlines of the HEC-RAS model
         '''
-        AllReachesPoints = gpd.GeoDataFrame()
+        AllReachesPoints_gpd_list=[] 
         for i, row in ReachInfoDF.iterrows():
             reachname, reachstart, reachend = row["river, reach"], row['StartlineNo'], row['EndlineNo']
             with open(geo_file_path) as TXTFile:
@@ -71,7 +71,8 @@ class BLE (object):
                     elif linenumer >= reachend:
                         break
 
-            AllReachesPoints = AllReachesPoints.append(ThisReach_Points)
+            AllReachesPoints_gpd_list.append(ThisReach_Points)
+        AllReachesPoints=pd.concat(AllReachesPoints_gpd_list)
         AllReachesLines = AllReachesPoints.groupby(['river_reach'],as_index=False)['geometry'].apply(lambda x: LineString(x.tolist()))
         AllReachesLines['river']=AllReachesLines.apply(lambda row: row.river_reach.split(',')[0], axis=1)
         AllReachesLines['reach'] = AllReachesLines.apply(lambda row: row.river_reach.split(',')[1], axis=1)
@@ -83,10 +84,10 @@ class BLE (object):
         inputs are 1) path to the HEC-RAS geometry text file, 2) A Pandas DataFrame with reach info
         output is a GeoDataFrame of the cross sections of the HEC-RAS model
         '''
-        AllXsPoints = gpd.GeoDataFrame()
+        AllXsPoints_gpd_list = []
         for i, row in ReachInfoDF.iterrows():
             reachname, reachstart, reachend = row["river, reach"], row['StartlineNo'], row['EndlineNo']
-            ThisReach_Points = gpd.GeoDataFrame()
+            ThisReach_Points_gpd_list=[]
             with open(geo_file_path) as TXTFile:
                 for linenumer, line in enumerate(TXTFile):
                     if linenumer >= reachstart and linenumer < reachend:
@@ -104,12 +105,14 @@ class BLE (object):
 
                             ThisXsectionPoints = gpd.GeoDataFrame(geometry=geometry)
                             ThisXsectionPoints['Xsectionid'] = "%s,%s" % (reachname, stn)
-                            ThisReach_Points = ThisReach_Points.append(ThisXsectionPoints)
+                            ThisReach_Points_gpd_list.append(ThisXsectionPoints)
 
                     elif linenumer >= reachend:
                         break
 
-            AllXsPoints = AllXsPoints.append(ThisReach_Points)
+            ThisReach_Points=pd.concat(ThisReach_Points_gpd_list)
+            AllXsPoints_gpd_list.append(ThisReach_Points)
+        AllXsPoints=pd.concat(AllXsPoints_gpd_list)
         AllXsLines = AllXsPoints.groupby(['Xsectionid'],as_index=False)['geometry'].apply(lambda x: LineString(x.tolist()))
         AllXsLines['river']=AllXsLines.apply(lambda row: row.Xsectionid.split(',')[0], axis=1)
         AllXsLines['reach'] = AllXsLines.apply(lambda row: row.Xsectionid.split(',')[1], axis=1)
