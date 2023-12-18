@@ -209,4 +209,4 @@ dependencies:
     - webencodings==0.5.1
     - websocket-client==1.7.0
     - widgetsnbextension==4.0.9
-prefix: C:\MiniConda\envs\netcdf
+prefix: C:\MiniConda\envs\ble
