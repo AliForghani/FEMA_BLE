@@ -1,7 +1,3 @@
-import glob
-import os
-from pathlib import Path
-
 import flopy
 import geopandas as gpd
 import numpy as np
@@ -117,7 +113,8 @@ class BLE(object):
                     if linenumer >= reachstart and linenumer < reachend:
                         if line.startswith("Type RM Length L Ch R"):
                             stn = line.split("=")[-1].split(",")[1]
-                            # it is possible to have description or other info for the Xsection, so move on until Xs GIS
+                            # it is possible to have description or other info for the Xsection,
+                            # so move on until Xs GIS
                             while 1:
                                 CountLine = TXTFile.readline()
                                 if CountLine.startswith("XS GIS Cut Line"):
@@ -193,7 +190,8 @@ class BLE(object):
 
     def read_domain(self, gdb_path, EPSG, driver="FileGDB", layer="S_HUC_Ar"):
         """
-        Required inputs are path to the gdb file and EPSG code. Optionally driver and layer name can be adjusted
+        Required inputs are path to the gdb file and EPSG code.
+        Optionally driver and layer name can be adjusted
         """
         domain_gdf = gpd.read_file(gdb_path, driver=driver, layer=layer)
 
